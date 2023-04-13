@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Empleados</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      tr:hover {
+        background-color: coral;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Lista de Empleados</h2>
+    <a href="{% url 'empledos_app:crear-empleado' %}">Nuevo Empleado</a>
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Nombre</td>
+          <td>Cargo</td>
+          <td>Operaciones</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for e in lista_empleados %}
+        <tr>
+          <td>{{ e.id }}</td>
+          <td>{{ e.nombre }}</td>
+          <td>{{ e.cargo.cargo }}</td>
+          <td>{{ e.operaciones }}</td>
+          <td><a href="">Modificar</a><a href="">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
