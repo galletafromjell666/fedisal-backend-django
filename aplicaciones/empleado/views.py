@@ -35,3 +35,8 @@ class CrearEmpleado2(CreateView):
     template_name = 'empleado/crear-empleado.html'
     form_class =  EmpleadoForm
     success_url = reverse_lazy('empleados_app:listar-empleados')
+
+class EliminarEmpleado(DeleteView):
+    template_name = 'empleado/eliminar-empleado.html'
+    model =  Empleado
+    success_url = reverse_lazy('empleados_app:listar-empleados')

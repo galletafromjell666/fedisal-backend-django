@@ -51,7 +51,7 @@
           <td>{{ e.id }}</td>
           <td>{{ e.nombre }}</td>
           <td>{{ e.cargo.cargo }}</td>
-          <td><a href="{% url 'empleados_app:modificar-empleados' e.id %}">Modificar</a> | <a href="">Eliminar</a></td>
+          <td><a href="{% url 'empleados_app:modificar-empleados' e.id %}">Modificar</a> | <a href="{% url 'empleados_app:eliminar-empleados' e.id %}">Eliminar</a></td>
         </tr>
         {% endfor %}
       </tbody>

@@ -15,4 +15,4 @@ class Empleado(models.Model):
     cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.nombre + '|' + self.correo + '|' + self.activo
+        return self.nombre + ' | ' + self.correo + ' | ' + str(self.activo)

@@ -12,4 +12,6 @@ urlpatterns = [
          views.ListarEmpleados.as_view(), name='listar-empleados'),
          path('empleado/modificar-empleados/<pk>/',
          views.ModificarEmpleado.as_view(), name='modificar-empleados'),
+          path('empleado/eliminar-empleados/<pk>/',
+         views.EliminarEmpleado.as_view(), name='eliminar-empleados'),
 ]
