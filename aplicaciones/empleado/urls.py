@@ -10,4 +10,6 @@ urlpatterns = [
          views.CrearEmpleado2.as_view(), name='crear-empleado2'),
            path('empleado/listar-empleados/',
          views.ListarEmpleados.as_view(), name='listar-empleados'),
+         path('empleado/modificar-empleados/<pk>/',
+         views.ModificarEmpleado.as_view(), name='modificar-empleados'),
 ]

@@ -9,24 +9,33 @@
       body {
         font-family: sans-serif;
       }
+
       table {
         border-collapse: collapse;
         width: 100%;
       }
+
       th,
       td {
         padding: 8px;
         text-align: left;
         border-bottom: 1px solid #ddd;
       }
+
       tr:hover {
         background-color: coral;
       }
     </style>
   </head>
+
   <body>
     <h2>Lista de Empleados</h2>
-    <a href="{% url 'empledos_app:crear-empleado' %}">Nuevo Empleado</a>
+    <a href="{% url 'empleados_app:crear-empleado' %}">Nuevo Empleado</a>
+    <br />
+    <br />
+    <form action="" method="get">
+      <input type="text" name="buscar" id="buscar" />
+    </form>
     <table>
       <thead>
         <tr>
@@ -42,11 +51,25 @@
           <td>{{ e.id }}</td>
           <td>{{ e.nombre }}</td>
           <td>{{ e.cargo.cargo }}</td>
-          <td>{{ e.operaciones }}</td>
-          <td><a href="">Modificar</a><a href="">Eliminar</a></td>
+          <td><a href="{% url 'empleados_app:modificar-empleados' e.id %}">Modificar</a> | <a href="">Eliminar</a></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+    {% if is_paginated %} 
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+      {% endif %} 
+      {%for i in paginator.page_range %} 
+      {% if page_obj.number == i %}
+      <span>{{ i }}</span>
+      {% else %}
+        <a href="?page={{ i }}">{{ i }}</a>
+      {% endif %} 
+      {% endfor %} 
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+      {% endif %} 
+    {% endif %}
   </body>
 </html>
