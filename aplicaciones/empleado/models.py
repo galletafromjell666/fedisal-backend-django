@@ -1,6 +1,14 @@
 from django.db import models
 
 # Create your models here.
+
+class Proyecto(models.Model):
+    nombre_proyecto = models.CharField('Nombre proyecto', max_length=50)
+    fecha_inicio = models.DateField('Fecha inicio', auto_now=False, auto_now_add=False)
+    fecha_fin = models.DateField('Fecha fin', auto_now=False, auto_now_add=False)
+    def __str__(self) -> str:
+        return self.nombre_proyecto
+
 class Cargo(models.Model):
     idcargo = models.BigAutoField(primary_key=True)
     cargo = models.CharField('Cargo', max_length=50, null=True)
@@ -13,6 +21,6 @@ class Empleado(models.Model):
     sueldo = models.DecimalField('Sueldo', max_digits=8, decimal_places=2)
     activo = models.BooleanField('Activo')
     cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE)
-
+    proyecto = models.ManyToManyField(Proyecto, blank=True, related_name='proyecto_empleado')
     def __str__(self) -> str:
         return self.nombre + ' | ' + self.correo + ' | ' + str(self.activo)

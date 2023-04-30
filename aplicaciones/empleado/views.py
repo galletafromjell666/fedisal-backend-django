@@ -3,14 +3,20 @@ from .models import Cargo, Empleado
 from django.views.generic import ListView, DeleteView, UpdateView, CreateView
 from django.urls import reverse_lazy
 from .forms import EmpleadoForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 # Create your views here.
-
-class ModificarEmpleado(UpdateView):
+@method_decorator(login_required,name='dispatch')
+class ModificarEmpleado(PermissionRequiredMixin,UpdateView):
+    permission_required = ('empleado.change_empleado',)
     template_name = 'empleado/modificar-empleado.html'
     model = Empleado
     form_class = EmpleadoForm
     success_url = reverse_lazy('empleados:app:listar-empleados')
 
+#using auth with decorator
+@method_decorator(login_required,name='dispatch')
 class ListarEmpleados(ListView):
     template_name = 'empleado/listar-empleados.html'
     model = Empleado
@@ -25,7 +31,10 @@ class ListarEmpleados(ListView):
         if buscar:
             lista = Empleado.objects.filter(nombre__icontains=buscar)
         return lista
-class CrearEmpleado(CreateView):
+    
+
+#using auth with inheritance
+class CrearEmpleado(LoginRequiredMixin,CreateView):
     template_name = 'empleado/crear-empleado.html'
     model = Empleado
     fields = ['nombre','correo', 'sueldo', 'activo','cargo']
