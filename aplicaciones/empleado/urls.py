@@ -6,7 +6,17 @@ app_name = 'empleados_app'
 urlpatterns = [
 
     # API Views
-     path('api/empleado/obtener-empleado/<pk>/',
+    path('api/empleado/buscar-empleados-sueldo/<mini>/<maxi>/',
+         views.BuscarAPIEmpleadosSueldo.as_view(), name='api-buscar-empleados-sueldo'),
+    path('api/empleado/buscar-empleado/<texto>/',
+         views.BuscarAPIEmpleados.as_view(), name='api-buscar-empleados'),
+    path('api/empleado/eliminar-empleado/<pk>/',
+         views.EliminarAPIEmpleado.as_view(), name='api-eliminar-empleado'),
+    path('api/empleado/modificar-empleado2/<pk>/',
+         views.ModificarAPIEmpleado2.as_view(), name='api-modificar-empleado2'),
+    path('api/empleado/modificar-empleado/<pk>/',
+         views.ModificarAPIEmpleado.as_view(), name='api-modificar-empleado'),
+    path('api/empleado/obtener-empleado/<pk>/',
          views.ObtenerAPIEmpleado.as_view(), name='api-obtener-empleado'),
     path('api/empleado/listar-empleados/',
          views.ListarAPIEmpleado.as_view(), name='api-listar-empleados'),

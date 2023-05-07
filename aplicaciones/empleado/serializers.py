@@ -24,4 +24,11 @@ class EmpleadoCPSerializer(serializers.ModelSerializer):
     proyecto = ProyectoSerializer(many = True)
     class Meta:
         model = Empleado
-        fields = ('__all__')
+        fields = ('id','nombre','correo', 'sueldo', 'activo', 'cargo', 'proyecto')
+
+class ProyectoSerializer(serializers.Serializer):
+    proyecto_empleado = serializers.CharField()
+    proyecto_empleado__nombre = serializers.CharField()
+    nombre_proyecto = serializers.CharField()
+    fecha_inicio = serializers.DateField()
+    fecha_fin = serializers.DateField()

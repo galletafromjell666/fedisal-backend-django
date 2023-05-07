@@ -1,11 +1,14 @@
 from django.db import models
 
+from .managers import EmpleadoManager, ProyectoManager
+
 # Create your models here.
 
 class Proyecto(models.Model):
     nombre_proyecto = models.CharField('Nombre proyecto', max_length=50)
     fecha_inicio = models.DateField('Fecha inicio', auto_now=False, auto_now_add=False)
     fecha_fin = models.DateField('Fecha fin', auto_now=False, auto_now_add=False)
+    objects = ProyectoManager()
     def __str__(self) -> str:
         return self.nombre_proyecto
 
@@ -22,5 +25,6 @@ class Empleado(models.Model):
     activo = models.BooleanField('Activo')
     cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE)
     proyecto = models.ManyToManyField(Proyecto, blank=True, related_name='proyecto_empleado')
+    objects = EmpleadoManager()
     def __str__(self) -> str:
         return self.nombre + ' | ' + self.correo + ' | ' + str(self.activo)
