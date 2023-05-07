@@ -6,7 +6,28 @@ from .forms import EmpleadoForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from rest_framework.generics import (ListAPIView, CreateAPIView, DestroyAPIView, UpdateAPIView, RetrieveAPIView,RetrieveUpdateAPIView)
+from .serializers import EmpleadoSerializer, EmpleadoCPSerializer
 # Create your views here.
+
+#API Views
+class ListarAPIEmpleado(ListAPIView):
+    serializer_class = EmpleadoSerializer
+    queryset = Empleado.objects.all()
+
+#ListarEmpleado con serializer para expandir los campos
+class ListarAPIEmpleado2(ListAPIView):
+    serializer_class = EmpleadoCPSerializer
+    queryset = Empleado.objects.all()
+
+class ObtenerAPIEmpleado(RetrieveAPIView):
+    serializer_class =  EmpleadoCPSerializer
+    queryset = Empleado.objects.all()
+class CrearAPIEmpleado(CreateAPIView):
+    serializer_class =  EmpleadoSerializer
+    
+
+#Views
 @method_decorator(login_required,name='dispatch')
 class ModificarEmpleado(PermissionRequiredMixin,UpdateView):
     permission_required = ('empleado.change_empleado',)

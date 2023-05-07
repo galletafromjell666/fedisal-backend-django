@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Empleado, Cargo
+from .models import Empleado, Cargo, Proyecto
 # Register your models here.
 
 #custom
@@ -10,3 +10,4 @@ class EmpleadoAdmin(admin.ModelAdmin):
 
 admin.site.register(Empleado, EmpleadoAdmin)
 admin.site.register(Cargo)
+admin.site.register(Proyecto)

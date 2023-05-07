@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'aplicaciones.login',
     'aplicaciones.empleado',
     #terceros
-    'captcha'
+    'captcha',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
